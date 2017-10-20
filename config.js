@@ -18,7 +18,7 @@ module.exports = {
   PROD: PROD,
   TEST: TEST,
   HTTP_HOST: process.env.HTTP_HOST || '0.0.0.0',
-  HTTP_PORT: process.env.HTTP_PORT || 8000,
+  HTTP_PORT: process.env.HTTP_PORT || process.env.PORT || 8000,
   DEBUG_SQL: process.env.DEBUG_SQL,
   SESSION_SECRET: process.env.SESSION_SECRET || 'we shall never surrender',
   SHOW_ERRORS: process.env.SHOW_ERRORS || DEV,

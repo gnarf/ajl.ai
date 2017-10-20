@@ -4,7 +4,8 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import routeBuilder from 'express-routebuilder';
-
+import fallback from 'express-history-api-fallback';
+import path from 'path';
 import session from '../services/session';
 import endpoints from '../endpoints';
 import { SHOW_ERRORS, HTTP_QUIET } from '../../config';
@@ -26,6 +27,10 @@ export default function appMaker(routes = endpoints) {
       endpoint.location
     );
   }));
+
+  const root = path.join(__dirname, '../../dist');
+  app.use(express.static(root));
+  app.use(fallback('index.html', { root }));
 
   app.use((req, res) => {
     res.status(404).send('404 Not Found');
